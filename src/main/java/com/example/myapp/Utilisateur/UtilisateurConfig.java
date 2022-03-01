@@ -15,7 +15,7 @@ public class UtilisateurConfig {
             UtilisateurRepository repository){
         return args -> {
             Utilisateur salah = new Utilisateur (
-                    "user1",
+                    "mohamed",
                     "mdp1",
                     "user1@gmail.com"
             );
