@@ -1,7 +1,6 @@
 package com.example.myapp.Fonctionalite;
 
-import com.example.myapp.employee.Employee;
-import com.example.myapp.employee.EmployeeRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
