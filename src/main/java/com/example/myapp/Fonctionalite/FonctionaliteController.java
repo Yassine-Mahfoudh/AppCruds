@@ -1,7 +1,5 @@
 package com.example.myapp.Fonctionalite;
 
-import com.example.myapp.employee.Employee;
-import com.example.myapp.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +20,11 @@ public class FonctionaliteController {
         return fonctionaliteService.getFonctionalites();
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Fonctionalite> addFonctionalite(@RequestBody Fonctionalite fonctionalite){
-        Fonctionalite newFonctionalite=fonctionaliteService.addNewFonctionalite(fonctionalite);
-        return new ResponseEntity<>(newFonctionalite , HttpStatus.CREATED);
-    }
+//    @PostMapping("/add")
+//    public ResponseEntity<Fonctionalite> addFonctionalite(@RequestBody Fonctionalite fonctionalite){
+//        Fonctionalite newFonctionalite=fonctionaliteService.addNewFonctionalite(fonctionalite);
+//        return new ResponseEntity<>(newFonctionalite , HttpStatus.CREATED);
+//    }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteFonctionalite(@PathVariable("id") Long id) {
         fonctionaliteService.deleteFonctionalite(id);

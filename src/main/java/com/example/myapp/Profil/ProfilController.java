@@ -2,6 +2,7 @@ package com.example.myapp.Profil;
 
 import com.example.myapp.Utilisateur.Utilisateur;
 import com.example.myapp.Utilisateur.UtilisateurService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,11 @@ public class ProfilController{
             return profilService.getProfils();
         }
 
-        @PostMapping("/add")
-        public ResponseEntity<Profil> addProfil(@RequestBody Profil profil){
-            Profil newProfil=profilService.addNewProfil(profil);
-            return new ResponseEntity<>(newProfil , HttpStatus.CREATED);
-        }
+//        @PostMapping("/add")
+//        public ResponseEntity<Profil> addProfil(@RequestBody Profil profil){
+//            Profil newProfil=profilService.addNewProfil(profil);
+//            return new ResponseEntity<>(newProfil , HttpStatus.CREATED);
+//        }
         @DeleteMapping("/delete/{id}")
         public ResponseEntity<?> deleteProfil(@PathVariable("id") Long id) {
             profilService.deleteProfil(id);
@@ -46,4 +47,36 @@ public class ProfilController{
             return new ResponseEntity<>(profil, HttpStatus.OK);
         }
 
+    @PostMapping("/fonctionalite/addtoprofil")
+    public ResponseEntity<?> addFonctionaliteToProfil(@RequestBody FoncToUserForm form){
+        profilService.addFoncToProfil(form.getProfilType(),form.getFoncnom());
+        return ResponseEntity.ok().build();
+    }
+
+}
+
+class FoncToUserForm{
+    private String profilType;
+    private String foncnom;
+
+    public FoncToUserForm(String profilType, String foncnom) {
+        this.profilType = profilType;
+        this.foncnom = foncnom;
+    }
+
+    public String getProfilType() {
+        return profilType;
+    }
+
+    public void setProfilType(String profilType) {
+        this.profilType = profilType;
+    }
+
+    public String getFoncnom() {
+        return foncnom;
+    }
+
+    public void setFoncnom(String foncnom) {
+        this.foncnom = foncnom;
+    }
 }

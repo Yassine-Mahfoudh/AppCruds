@@ -1,7 +1,7 @@
 package com.example.myapp.Profil;
 
-import com.example.myapp.Utilisateur.Utilisateur;
-import com.example.myapp.Utilisateur.UtilisateurRepository;
+import com.example.myapp.Fonctionalite.Fonctionalite;
+import com.example.myapp.Fonctionalite.FonctionaliteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +13,27 @@ import java.util.Optional;
 
 public class ProfilService {
     public final ProfilRepository profilRepository;
+    public final FonctionaliteRepository fonctionaliteRepository;
     @Autowired
-    public ProfilService(ProfilRepository profilRepository) {
+    public ProfilService(ProfilRepository profilRepository, FonctionaliteRepository fonctionaliteRepository) {
         this.profilRepository = profilRepository;
+        this.fonctionaliteRepository = fonctionaliteRepository;
     }
 
     public List<Profil> getProfils(){
         return profilRepository.findAll();
     }
-
-    public Profil addNewProfil(Profil profil) {
-        Optional<Profil> profilOptional = profilRepository
-                .findProfilBytype(profil.getType());
-        if (profilOptional.isPresent()){
-            throw new IllegalStateException("type token");
-        }
+    public Profil saveProfil(Profil profil) {
         return profilRepository.save(profil);
     }
+//    public Profil addNewProfil(Profil profil) {
+//        Optional<Profil> profilOptional = profilRepository
+//                .findProfilBytype(profil.getType());
+//        if (profilOptional.isPresent()){
+//            throw new IllegalStateException("type token");
+//        }
+//        return profilRepository.save(profil);
+//    }
     public void deleteProfil(Long id){
         profilRepository.findById(id);
         boolean exists=profilRepository.existsById(id);
@@ -48,5 +52,12 @@ public class ProfilService {
     public Profil findProfilById(Long id) {
         return profilRepository.findProfilById(id)
                 .orElseThrow(() -> new IllegalStateException("Profil by id " + id + " was not found"));
+    }
+
+    public void addFoncToProfil(String type, String nom) {
+       Profil profil = profilRepository.findProfilBytype(type);
+        Fonctionalite fonctionalite = fonctionaliteRepository.findFonctionaliteByNom(nom);
+        profil.getFonctionalites().add(fonctionalite);
+        profilRepository.save(profil);
     }
 }

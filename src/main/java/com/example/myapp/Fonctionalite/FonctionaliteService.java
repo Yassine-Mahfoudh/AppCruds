@@ -18,15 +18,17 @@ public class FonctionaliteService {
     public List<Fonctionalite> getFonctionalites(){
         return fonctionaliteRepository.findAll();
     }
-
-    public Fonctionalite addNewFonctionalite(Fonctionalite fonctionalite) {
-        Optional<Fonctionalite> fonctionaliteOptional = fonctionaliteRepository
-                .findFonctionaliteByNom(fonctionalite.getNom());
-        if (fonctionaliteOptional.isPresent()){
-            throw new IllegalStateException("nom token");
-        }
+    public Fonctionalite saveFonctionalite(Fonctionalite fonctionalite) {
         return fonctionaliteRepository.save(fonctionalite);
     }
+//    public Fonctionalite addNewFonctionalite(Fonctionalite fonctionalite) {
+//        Optional<Fonctionalite> fonctionaliteOptional = fonctionaliteRepository
+//                .findFonctionaliteByNom(fonctionalite.getNom());
+//        if (fonctionaliteOptional.isPresent()){
+//            throw new IllegalStateException("nom token");
+//        }
+//        return fonctionaliteRepository.save(fonctionalite);
+//    }
     public void deleteFonctionalite(Long id){
         fonctionaliteRepository.findById(id);
         boolean exists=fonctionaliteRepository.existsById(id);
