@@ -15,25 +15,7 @@ public class EmployeeConfig {
     CommandLineRunner commandLineRunner(
             EmployeeRepository repository){
         return args -> {
-            Employee yassine = new Employee (
-                    "yassine",
-                    "mahfoudh",
-                    LocalDate.of(2000,6,25),
-                    "68 darchaabene",
-                    "responsableRH",
-                    Boolean.FALSE
-            );
-            Employee houssem = new Employee (
-                    "houssem",
-                    "hmida",
-                    LocalDate.of(1999,4,2),
-                    "68 sfax",
-                    "employee",
-                    Boolean.TRUE
-            );
-            repository.saveAll(
-                    List.of(yassine,houssem)
-            );
+
         };
     }
 

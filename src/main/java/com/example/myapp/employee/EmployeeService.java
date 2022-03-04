@@ -20,14 +20,14 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee addNewEmployee(Employee employee) {
-    Optional<Employee> employeeOptional = employeeRepository
-            .findEmployeeByNom(employee.getNom());
-    if (employeeOptional.isPresent()){
-        throw new IllegalStateException("nom token");
-    }
-     return employeeRepository.save(employee);
-    }
+//    public Employee addNewEmployee(Employee employee) {
+//    Optional<Employee> employeeOptional = employeeRepository
+//            .findEmployeeByNom(employee.getNom());
+//    if (employeeOptional.isPresent()){
+//        throw new IllegalStateException("nom token");
+//    }
+//     return employeeRepository.save(employee);
+//    }
     public void deleteEmployee(Long id){
     employeeRepository.findById(id);
     boolean exists=employeeRepository.existsById(id);

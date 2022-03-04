@@ -1,10 +1,13 @@
 package com.example.myapp.Utilisateur;
 
 
+import com.example.myapp.employee.Employee;
+import com.example.myapp.employee.EmployeeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Configuration
@@ -12,8 +15,29 @@ import java.util.List;
 public class UtilisateurConfig {
     @Bean
     CommandLineRunner commandLineRunner2(
-            UtilisateurRepository repository){
+            UtilisateurRepository utilisateurRepository,
+    EmployeeRepository employeeRepository){
         return args -> {
+            Employee yassine = new Employee (
+                    "yassine",
+                    "mahfoudh",
+                    LocalDate.of(2000,6,25),
+                    "68 darchaabene",
+                    "responsableRH",
+                    Boolean.FALSE
+            );
+            Employee houssem = new Employee (
+                    "houssem",
+                    "hmida",
+                    LocalDate.of(1999,4,2),
+                    "68 sfax",
+                    "employee",
+                    Boolean.TRUE
+            );
+            employeeRepository.saveAll(
+                    List.of(yassine,houssem)
+            );
+
             Utilisateur salah = new Utilisateur (
                     "mohamed",
                     "mdp1",
@@ -24,9 +48,10 @@ public class UtilisateurConfig {
                     "mdp2",
                     "user2@gmail.com"
             );
-            repository.saveAll(
+            utilisateurRepository.saveAll(
                     List.of(salah,oussama)
             );
+
         };
     }
 

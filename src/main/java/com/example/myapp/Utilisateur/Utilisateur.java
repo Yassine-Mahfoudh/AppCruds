@@ -22,7 +22,7 @@ public class Utilisateur {
     private String MotDePasse;
     private String email;
     @OneToOne
-    @JoinColumn(name = "employee_fk")
+    @JoinColumn(name = "employee_fk",referencedColumnName = "id")
     private Employee employee;
 
     public Utilisateur() {

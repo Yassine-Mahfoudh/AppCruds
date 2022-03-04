@@ -1,7 +1,6 @@
 package com.example.myapp.Utilisateur;
 
-import com.example.myapp.employee.Employee;
-import com.example.myapp.employee.EmployeeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +23,11 @@ public class UtilisateurController {
         return utilisateurService.getUtilisateurs();
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Utilisateur> addUtilisateur(@RequestBody Utilisateur utilisateur){
-        Utilisateur newUtilisateur=utilisateurService.addNewUtilisateur(utilisateur);
-        return new ResponseEntity<>(newUtilisateur ,HttpStatus.CREATED);
-    }
+//    @PostMapping("/add")
+//    public ResponseEntity<Utilisateur> addUtilisateur(@RequestBody Utilisateur utilisateur){
+//        Utilisateur newUtilisateur=utilisateurService.addNewUtilisateur(utilisateur);
+//        return new ResponseEntity<>(newUtilisateur ,HttpStatus.CREATED);
+//    }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUtilisateur(@PathVariable("id") Long id) {
         utilisateurService.deleteUtilisateur(id);
@@ -46,4 +45,30 @@ public class UtilisateurController {
         return new ResponseEntity<>(utilisateur, HttpStatus.OK);
     }
 
+    @PostMapping("/employee/addtoutilisateur")
+    public ResponseEntity<?> addEmpToUtilisateur(@RequestBody EmpToUtilisateurForm form){
+        utilisateurService.addEmpToUtilisateur(form.getNom(),form.getLogin());
+        return ResponseEntity.ok().build();
+    }
+
+}
+class EmpToUtilisateurForm {
+    private String nom;
+    private String login;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }

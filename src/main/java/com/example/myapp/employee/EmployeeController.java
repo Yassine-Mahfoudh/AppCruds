@@ -22,11 +22,11 @@ public class EmployeeController {
        return employeeService.getEmployees();
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
-        Employee newEmployee=employeeService.addNewEmployee(employee);
-        return new ResponseEntity<>(newEmployee ,HttpStatus.CREATED);
-    }
+//    @PostMapping("/add")
+//    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+//        Employee newEmployee=employeeService.addNewEmployee(employee);
+//        return new ResponseEntity<>(newEmployee ,HttpStatus.CREATED);
+//    }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);

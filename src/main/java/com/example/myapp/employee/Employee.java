@@ -2,6 +2,8 @@ package com.example.myapp.employee;
 
 
 
+import com.example.myapp.Utilisateur.Utilisateur;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -25,7 +27,8 @@ public class Employee {
     private Boolean etat;
     private LocalDate datenaiss;
     private String adresse;
-
+    @OneToOne(mappedBy = "employee")
+    private Utilisateur utilisateur;
     public Employee() {
     }
 
