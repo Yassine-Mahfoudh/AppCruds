@@ -25,21 +25,21 @@ public class DepartementConfig {
 
             Salle salle1 = new Salle(
                     "reunion",
-                    1,
+                    11,
                     10,
                     50
             );
 
             Salle salle2 = new Salle(
                     "travail",
-                    2,
+                    22,
                     15,
                     75
             );
 
             Salle salle3 = new Salle(
                     "projection",
-                    3,
+                    33,
                     20,
                     100
             );

@@ -18,22 +18,23 @@ public class SalleService {
         return salleRepository.findAll();
     }
 
-//    public Salle addNewSalle(Salle Salle) {
-//        Optional<Salle> SalleOptional = salleRepository
-//                .findSalleByNum(Salle.getNum());
-//        if (SalleOptional.isPresent()){
-//            throw new IllegalStateException("nom token");
-//        }
-//        return salleRepository.save(Salle);
-//    }
-    public void deleteSalle(Long id){
-        salleRepository.findById(id);
-        boolean exists= salleRepository.existsById(id);
+    public Salle addNewSalle(Salle Salle) {
+        Optional<Salle> SalleOptional = salleRepository
+                .findSalleByNum(Salle.getNum());
+        if (SalleOptional.isPresent()){
+            throw new IllegalStateException("num token");
+        }
+        return salleRepository.save(Salle);
+    }
+    @Transactional
+    public void deleteSalle(int num){
+        salleRepository.findSalleByNum(num);
+        boolean exists= salleRepository.existsByNum(num);
         if (!exists){
             throw new IllegalStateException(
-                    "salle with id "+ id + " does not exists");
+                    "salle with num "+ num + " does not exists");
         }
-        salleRepository.deleteById(id);
+        salleRepository.deleteByNum(num);
     }
     @Transactional
     public Salle updateSalle(Salle Salle) {
@@ -41,8 +42,9 @@ public class SalleService {
         return salleRepository.save(Salle);
     }
 
-    public Salle findSalleById(Long id) {
-        return salleRepository.findSalleById(id)
-                .orElseThrow(() -> new IllegalStateException(" salle with id " + id + " does not exists"));
+    public Salle findSalleByNum(int num) {
+        return salleRepository.findSalleByNum(num)
+                .orElseThrow(() -> new IllegalStateException(" salle with num " + num + " does not exists"));
     }
+
 }

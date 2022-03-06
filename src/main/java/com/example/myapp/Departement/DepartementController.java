@@ -23,14 +23,14 @@ public class DepartementController {
         return departementService.getDepartement();
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Departement> addDepartement(@RequestBody Departement departement){
-//        Departement newDepartement=departementService.addNewDepartement(departement);
-//        return new ResponseEntity<>(newDepartement , HttpStatus.CREATED);
-//    }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteDepartement(@PathVariable("id") Long id) {
-        departementService.deleteDepartement(id);
+    @PostMapping("/add")
+    public ResponseEntity<Departement> addDepartement(@RequestBody Departement departement){
+        Departement newDepartement=departementService.addNewDepartement(departement);
+        return new ResponseEntity<>(newDepartement , HttpStatus.CREATED);
+    }
+    @DeleteMapping("/delete/{nom}")
+    public ResponseEntity<?> deleteDepartement(@PathVariable("nom") String nom) {
+        departementService.deleteDepartement(nom);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/update")
@@ -39,9 +39,9 @@ public class DepartementController {
         return new ResponseEntity<>(updateDepartement, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Departement> getDepartementById (@PathVariable("id") Long id) {
-        Departement departement = departementService.findDepartementById(id);
+    @GetMapping("/find/{nom}")
+    public ResponseEntity<Departement> getDepartementByNom (@PathVariable("nom") String nom) {
+        Departement departement = departementService.findDepartementByNom(nom);
         return new ResponseEntity<>(departement, HttpStatus.OK);
     }
 
@@ -50,33 +50,33 @@ public class DepartementController {
         return departementService.getSallebyDepartement(id); }
     @PostMapping("/salle/addtodep")
     public ResponseEntity<?> addSalleToDepartement(@RequestBody SalleToDepartForm form){
-        departementService.addSalleToDep(form.getNomdep(),form.getNumsalle());
+        departementService.addSalleToDep(form.getIddep(),form.getIdsalle());
         return ResponseEntity.ok().build();
     }
 
 }
 class SalleToDepartForm{
-    private String nomdep;
-    private int numsalle;
+    private Long iddep;
+    private Long idsalle;
 
-    public SalleToDepartForm(String nomdep, int numsalle) {
-        this.nomdep = nomdep;
-        this.numsalle = numsalle;
+    public SalleToDepartForm(Long iddep, Long idsalle) {
+        this.iddep = iddep;
+        this.idsalle = idsalle;
     }
 
-    public String getNomdep() {
-        return nomdep;
+    public Long getIddep() {
+        return iddep;
     }
 
-    public void setNomdep(String nomdep) {
-        this.nomdep = nomdep;
+    public void setIddep(Long iddep) {
+        this.iddep = iddep;
     }
 
-    public int getNumsalle() {
-        return numsalle;
+    public Long getIdsalle() {
+        return idsalle;
     }
 
-    public void setNumsalle(int numsalle) {
-        this.numsalle = numsalle;
+    public void setIdsalle(Long idsalle) {
+        this.idsalle = idsalle;
     }
 }

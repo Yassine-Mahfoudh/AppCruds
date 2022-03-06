@@ -23,22 +23,23 @@ public class DepartementService {
         return departementRepository.findAll();
     }
 
-//    public Departement addNewDepartement(Departement departement) {
-//        Optional<Departement> departementOptional = departementRepository
-//                .findDepartementByNom(departement.getNom());
-//        if (departementOptional.isPresent()){
-//            throw new IllegalStateException("nom token");
-//        }
-//        return departementRepository.save(departement);
-//    }
-    public void deleteDepartement(Long id){
-        departementRepository.findById(id);
-        boolean exists=departementRepository.existsById(id);
+    public Departement addNewDepartement(Departement departement) {
+        Optional<Departement> departementOptional = departementRepository
+                .findDepartementByNom(departement.getNom());
+        if (departementOptional.isPresent()){
+            throw new IllegalStateException("nom token");
+        }
+        return departementRepository.save(departement);
+    }
+    @Transactional
+    public void deleteDepartement(String nom){
+        departementRepository.findDepartementByNom(nom);
+        boolean exists=departementRepository.existsByNom(nom);
         if (!exists){
             throw new IllegalStateException(
-                    "departement with id "+ id + " does not exists");
+                    "departement with name "+ nom + " does not exists");
         }
-        departementRepository.deleteById(id);
+        departementRepository.deleteByNom(nom);
     }
     @Transactional
     public Departement updateDepartement(Departement departement) {
@@ -46,18 +47,18 @@ public class DepartementService {
         return departementRepository.save(departement);
     }
 
-    public Departement findDepartementById(Long id) {
-        return departementRepository.findDepartementById(id)
-                .orElseThrow(() -> new IllegalStateException("User by id " + id + " was not found"));
+    public Departement findDepartementByNom(String nom) {
+        return departementRepository.findDepartementByNom(nom)
+               .orElseThrow(() -> new IllegalStateException("Departemet by name " + nom + " was not found"));
     }
 
     public List<Salle> getSallebyDepartement(Long id) {
         return departementRepository.getSallebyDepartement(id);
     }
 
-    public void addSalleToDep(String nomdep, int numsalle) {
-        Departement departement = departementRepository.findDepartementByNom(nomdep);
-        Salle salle = salleRepository.findSalleByNum(numsalle);
+    public void addSalleToDep(Long iddep, Long idsalle) {
+        Departement departement = departementRepository.findDepartementById(iddep);
+        Salle salle = salleRepository.findSalleById(idsalle);
         departement.getSalles().add(salle);
         departementRepository.save(departement);
     }

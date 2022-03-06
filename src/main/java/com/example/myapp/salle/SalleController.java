@@ -22,14 +22,14 @@ public class SalleController {
         return salleService.getSalle();
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Salle> addSalle(@RequestBody Salle salle){
-//        Salle newSalle = salleService.addNewSalle(salle);
-//        return new ResponseEntity<>(newSalle, HttpStatus.CREATED);
-//    }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteSalle(@PathVariable("id") Long id) {
-        salleService.deleteSalle(id);
+    @PostMapping("/add")
+    public ResponseEntity<Salle> addSalle(@RequestBody Salle salle){
+        Salle newSalle = salleService.addNewSalle(salle);
+        return new ResponseEntity<>(newSalle, HttpStatus.CREATED);
+    }
+    @DeleteMapping("/delete/{num}")
+    public ResponseEntity<?> deleteSalle(@PathVariable("num") int num) {
+        salleService.deleteSalle(num);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/update")
@@ -38,18 +38,10 @@ public class SalleController {
         return new ResponseEntity<>(updateSalle, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Salle> getSalleById (@PathVariable("id") Long id) {
-        Salle salle = salleService.findSalleById(id);
+   @GetMapping("/find/{num}")
+    public ResponseEntity<Salle> getSalleByNum (@PathVariable("num") int num) {
+        Salle salle = salleService.findSalleByNum(num);
         return new ResponseEntity<>(salle, HttpStatus.OK);
     }
 
-    /*@PutMapping(path = "{id}")
-    public ResponseEntity<Employee> updateEmployee(
-            @PathVariable("id") Long id,
-            @RequestParam(required = false) String nom,
-            @RequestParam(required = false) String adresse){
-        employeeService.updateEmployee(id,nom,adresse);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }*/
 }

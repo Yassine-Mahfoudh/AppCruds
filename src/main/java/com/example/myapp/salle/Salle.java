@@ -1,7 +1,5 @@
 package com.example.myapp.salle;
 
-import com.example.myapp.Departement.Departement;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -93,4 +91,5 @@ public class Salle implements Serializable {
                 ", pourcentagePres=" + pourcentagePres +
                 '}';
     }
+
 }
