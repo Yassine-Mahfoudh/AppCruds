@@ -42,14 +42,14 @@ public class UtilisateurConfig {
             Utilisateur salah = new Utilisateur (
                     "mohamed",
                     "mdp1",
-                    "user1@gmail.com"
-//                    new ArrayList<>()
+                    "user1@gmail.com",
+                    new ArrayList<>()
             );
             Utilisateur oussama = new Utilisateur (
                     "user",
                     "mdp2",
-                    "user2@gmail.com"
-//                    new ArrayList<>()
+                    "user2@gmail.com",
+                    new ArrayList<>()
             );
             utilisateurRepository.saveAll(
                     List.of(salah,oussama)

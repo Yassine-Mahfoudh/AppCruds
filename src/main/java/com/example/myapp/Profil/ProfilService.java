@@ -61,5 +61,7 @@ public class ProfilService {
         Fonctionalite fonctionalite = fonctionaliteRepository.findFonctionaliteById(idfonc);
         profil.getFonctionalites().add(fonctionalite);
         profilRepository.save(profil);
+
+
     }
 }

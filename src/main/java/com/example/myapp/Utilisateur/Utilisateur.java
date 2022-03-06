@@ -3,6 +3,8 @@ package com.example.myapp.Utilisateur;
 import com.example.myapp.Fonctionalite.Fonctionalite;
 import com.example.myapp.Profil.Profil;
 import com.example.myapp.employee.Employee;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,32 +32,37 @@ public class Utilisateur {
     @OneToOne
     @JoinColumn(name = "employee_fk",referencedColumnName = "id")
     private Employee employee;
-//    @ManyToMany(fetch = EAGER )
-//    private Collection<Profil> profils = new ArrayList<>();
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+
+    private Collection<Profil> profils = new ArrayList<>();
 
     public Utilisateur() {
     }
 
-    public Utilisateur(Long id, String login, String motDePasse, String email) {
+    public Utilisateur(String login, String motDePasse, String email, Collection<Profil> profils) {
+        this.login = login;
+        MotDePasse = motDePasse;
+        this.email = email;
+
+        this.profils = profils;
+    }
+
+    public Utilisateur(Long id, String login, String motDePasse, String email, Collection<Profil> profils) {
         this.id = id;
         this.login = login;
         MotDePasse = motDePasse;
         this.email = email;
+        this.profils = profils;
     }
 
-    public Utilisateur(String login, String motDePasse, String email ) {
-        this.login = login;
-        MotDePasse = motDePasse;
-        this.email = email;
+    public Collection<Profil> getProfils() {
+        return profils;
     }
 
-//    public Collection<Profil> getProfils() {
-//        return profils;
-//    }
-
-//    public void setProfils(Collection<Profil> profils) {
-//        this.profils = profils;
-//    }
+    public void setProfils(Collection<Profil> profils) {
+        this.profils = profils;
+    }
 
     public String getLogin() {
         return login;

@@ -50,11 +50,11 @@ public class UtilisateurController {
         utilisateurService.addEmpToUtilisateur(form.getIdemp(),form.getIdU());
         return ResponseEntity.ok().build();
     }
-//    @PostMapping("/profil/addtoutilisateur")
-//    public ResponseEntity<?> addProfilToUtilisateur(@RequestBody ProfilToUtilisateurForm form){
-//        utilisateurService.addProfilToUtilisateur(form.getIdprofil(),form.getIdU());
-//        return ResponseEntity.ok().build();
-//    }
+    @PostMapping("/profil/addtoutilisateur")
+    public ResponseEntity<?> addProfilToUtilisateur(@RequestBody ProfilToUtilisateurForm form){
+        utilisateurService.addProfilToUtilisateur(form.getIdprofil(),form.getIdU());
+        return ResponseEntity.ok().build();
+    }
 }
 class EmpToUtilisateurForm {
     private Long idemp;
@@ -76,24 +76,24 @@ class EmpToUtilisateurForm {
         this.idU = idU;
     }
 }
-//class ProfilToUtilisateurForm {
-//    private Long idprofil;
-//    private Long idU;
-//
-//    public Long getIdprofil() {
-//        return idprofil;
-//    }
-//
-//    public void setIdprofil(Long idprofil) {
-//        this.idprofil = idprofil;
-//    }
-//
-//    public Long getIdU() {
-//        return idU;
-//    }
-//
-//    public void setIdU(Long idU) {
-//        this.idU = idU;
-//    }
-//}
+class ProfilToUtilisateurForm {
+    private Long idprofil;
+    private Long idU;
+
+    public Long getIdprofil() {
+        return idprofil;
+    }
+
+    public void setIdprofil(Long idprofil) {
+        this.idprofil = idprofil;
+    }
+
+    public Long getIdU() {
+        return idU;
+    }
+
+    public void setIdU(Long idU) {
+        this.idU = idU;
+    }
+}
 

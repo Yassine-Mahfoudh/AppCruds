@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Configuration
 public class FonctionaliteConfig {
@@ -17,12 +18,10 @@ public class FonctionaliteConfig {
             Fonctionalite f1 = new Fonctionalite (
                     "gerer profil",
                     "admin"
-
             );
             Fonctionalite f2 = new Fonctionalite (
                     "consulter salle",
                     "employee"
-
             );
 
             repository.saveAll(

@@ -67,10 +67,10 @@ public class UtilisateurService {
         utilisateurRepository.save(utilisateur);
     }
 
-//    public void addProfilToUtilisateur(Long idprofil, Long idU) {
-//        Utilisateur utilisateur = utilisateurRepository.findUtilisateurById(idU);
-//        Profil profil = profilRepository.findProfilById(idprofil);
-//        utilisateur.getProfils().add(profil);
-//        profilRepository.save(profil);
-//    }
+    public void addProfilToUtilisateur(Long idprofil, Long idU) {
+        Utilisateur utilisateur = utilisateurRepository.findUtilisateurById(idU);
+        Profil profil = profilRepository.findProfilById(idprofil);
+        utilisateur.getProfils().add(profil);
+        profilRepository.save(profil);
+    }
 }

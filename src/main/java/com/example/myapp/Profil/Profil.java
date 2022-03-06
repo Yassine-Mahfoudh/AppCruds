@@ -26,7 +26,7 @@ public class Profil {
     private Long id;
     private String type;
     private LocalDate date_creation;
-    @ManyToMany(fetch = EAGER )
+    @ManyToMany(fetch = EAGER)
     private Collection<Fonctionalite> fonctionalites = new ArrayList<>();
 
     public Profil(String type, LocalDate date_creation, Collection<Fonctionalite> fonctionalites) {
