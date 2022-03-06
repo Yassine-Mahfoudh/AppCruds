@@ -20,6 +20,6 @@ public interface DepartementRepository
 
      Departement findDepartementById(Long id);
 
-    @Query("SELECT dep.Salles FROM Departement dep where dep.id = ?1")
-    List<Salle> getSallebyDepartement(Long id);
+    @Query("SELECT dep.Salles FROM Departement dep where dep.nom = ?1")
+    List<Salle> getSallebyDepartement(String nom);
 }

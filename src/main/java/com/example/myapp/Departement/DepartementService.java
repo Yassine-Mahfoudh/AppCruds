@@ -52,8 +52,9 @@ public class DepartementService {
                .orElseThrow(() -> new IllegalStateException("Departemet by name " + nom + " was not found"));
     }
 
-    public List<Salle> getSallebyDepartement(Long id) {
-        return departementRepository.getSallebyDepartement(id);
+    public List<Salle> getSallebyDepartement(String nom) {
+
+        return departementRepository.getSallebyDepartement(nom);
     }
 
     public void addSalleToDep(Long iddep, Long idsalle) {

@@ -45,9 +45,10 @@ public class DepartementController {
         return new ResponseEntity<>(departement, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}/salles")
-    public List<Salle> getSallebyDepartement(@PathVariable("id") Long id) {
-        return departementService.getSallebyDepartement(id); }
+    @GetMapping("/find/{nom}/salles")
+    public List<Salle> getSallebyDepartement(@PathVariable("nom") String nom) {
+        return departementService.getSallebyDepartement(nom); }
+
     @PostMapping("/salle/addtodep")
     public ResponseEntity<?> addSalleToDepartement(@RequestBody SalleToDepartForm form){
         departementService.addSalleToDep(form.getIddep(),form.getIdsalle());
