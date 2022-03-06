@@ -80,4 +80,14 @@ public class Profil {
 
     public Profil() {
     }
+
+    @Override
+    public String toString() {
+        return "Profil{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", date_creation=" + date_creation +
+                ", fonctionalites=" + fonctionalites +
+                '}';
+    }
 }

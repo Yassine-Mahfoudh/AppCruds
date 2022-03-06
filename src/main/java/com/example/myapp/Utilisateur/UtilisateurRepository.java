@@ -9,7 +9,11 @@ import java.util.Optional;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
     @Query("SELECT s FROM Utilisateur s where s.login = ?1")
-    Utilisateur findUtilisateurBylogin(String login);
+    Optional <Utilisateur> findUtilisateurBylogin(String login);
 
-    Optional <Utilisateur> findUtilisateurById(Long id);
+    Utilisateur findUtilisateurById(Long id);
+
+    boolean existsByLogin(String login);
+    void deleteByLogin(String login);
+
 }

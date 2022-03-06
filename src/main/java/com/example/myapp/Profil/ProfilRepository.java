@@ -8,7 +8,11 @@ import java.util.Optional;
 @Repository
 public interface ProfilRepository extends JpaRepository<Profil,Long> {
     @Query("SELECT s FROM Profil s where s.type = ?1")
-    Profil findProfilBytype(String type);
+    Optional <Profil> findProfilByType(String type);
 
-    Optional <Profil> findProfilById(Long id);
+    Profil findProfilById(Long id);
+
+    boolean existsByType(String type);
+    void deleteByType(String type);
+
 }

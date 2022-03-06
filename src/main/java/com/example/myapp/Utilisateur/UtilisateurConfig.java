@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -42,11 +43,13 @@ public class UtilisateurConfig {
                     "mohamed",
                     "mdp1",
                     "user1@gmail.com"
+//                    new ArrayList<>()
             );
             Utilisateur oussama = new Utilisateur (
                     "user",
                     "mdp2",
                     "user2@gmail.com"
+//                    new ArrayList<>()
             );
             utilisateurRepository.saveAll(
                     List.of(salah,oussama)

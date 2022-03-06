@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,22 +27,23 @@ public class ProfilService {
     public Profil saveProfil(Profil profil) {
         return profilRepository.save(profil);
     }
-//    public Profil addNewProfil(Profil profil) {
-//        Optional<Profil> profilOptional = profilRepository
-//                .findProfilBytype(profil.getType());
-//        if (profilOptional.isPresent()){
-//            throw new IllegalStateException("type token");
-//        }
-//        return profilRepository.save(profil);
-//    }
-    public void deleteProfil(Long id){
-        profilRepository.findById(id);
-        boolean exists=profilRepository.existsById(id);
+    public Profil addNewProfil(Profil profil) {
+        Optional<Profil> profilOptional = profilRepository
+                .findProfilByType(profil.getType());
+        if (profilOptional.isPresent()){
+            throw new IllegalStateException("type token");
+        }
+        return profilRepository.save(profil);
+    }
+    @Transactional
+    public void deleteProfil(String type){
+        profilRepository.findProfilByType(type);
+        boolean exists=profilRepository.existsByType(type);
         if (!exists){
             throw new IllegalStateException(
-                    "profil with id "+ id + " does not exists");
+                    "profil with type "+ type + " does not exists");
         }
-        profilRepository.deleteById(id);
+        profilRepository.deleteByType(type);
     }
     @Transactional
     public Profil updateProfil(Profil profil) {
@@ -49,14 +51,14 @@ public class ProfilService {
         return profilRepository.save(profil);
     }
 
-    public Profil findProfilById(Long id) {
-        return profilRepository.findProfilById(id)
-                .orElseThrow(() -> new IllegalStateException("Profil by id " + id + " was not found"));
+    public Profil findProfilByType(String type) {
+        return profilRepository.findProfilByType(type)
+                .orElseThrow(() -> new IllegalStateException("Profil by type " + type + " was not found"));
     }
 
-    public void addFoncToProfil(String type, String nom) {
-       Profil profil = profilRepository.findProfilBytype(type);
-        Fonctionalite fonctionalite = fonctionaliteRepository.findFonctionaliteByNom(nom);
+    public void addFoncToProfil(Long idprofil, Long idfonc) {
+       Profil profil = profilRepository.findProfilById(idprofil);
+        Fonctionalite fonctionalite = fonctionaliteRepository.findFonctionaliteById(idfonc);
         profil.getFonctionalites().add(fonctionalite);
         profilRepository.save(profil);
     }

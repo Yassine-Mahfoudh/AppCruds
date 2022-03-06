@@ -30,9 +30,9 @@ public class ProfilController{
 //            Profil newProfil=profilService.addNewProfil(profil);
 //            return new ResponseEntity<>(newProfil , HttpStatus.CREATED);
 //        }
-        @DeleteMapping("/delete/{id}")
-        public ResponseEntity<?> deleteProfil(@PathVariable("id") Long id) {
-            profilService.deleteProfil(id);
+        @DeleteMapping("/delete/{type}")
+        public ResponseEntity<?> deleteProfil(@PathVariable("type") String type) {
+            profilService.deleteProfil(type);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         @PutMapping("/update")
@@ -41,42 +41,37 @@ public class ProfilController{
             return new ResponseEntity<>(updateProfil, HttpStatus.OK);
         }
 
-        @GetMapping("/find/{id}")
-        public ResponseEntity<Profil> getProfilById (@PathVariable("id") Long id) {
-            Profil profil = profilService.findProfilById(id);
+        @GetMapping("/find/{type}")
+        public ResponseEntity<Profil> getProfilByType (@PathVariable("type") String type) {
+            Profil profil = profilService.findProfilByType(type);
             return new ResponseEntity<>(profil, HttpStatus.OK);
         }
 
     @PostMapping("/fonctionalite/addtoprofil")
     public ResponseEntity<?> addFonctionaliteToProfil(@RequestBody FoncToUserForm form){
-        profilService.addFoncToProfil(form.getProfilType(),form.getFoncnom());
+        profilService.addFoncToProfil(form.getIdprofil(),form.getIdfonc());
         return ResponseEntity.ok().build();
     }
 
 }
 
 class FoncToUserForm{
-    private String profilType;
-    private String foncnom;
+    private Long idprofil;
+    private Long idfonc;
 
-    public FoncToUserForm(String profilType, String foncnom) {
-        this.profilType = profilType;
-        this.foncnom = foncnom;
+    public Long getIdprofil() {
+        return idprofil;
     }
 
-    public String getProfilType() {
-        return profilType;
+    public void setIdprofil(Long idprofil) {
+        this.idprofil = idprofil;
     }
 
-    public void setProfilType(String profilType) {
-        this.profilType = profilType;
+    public Long getIdfonc() {
+        return idfonc;
     }
 
-    public String getFoncnom() {
-        return foncnom;
-    }
-
-    public void setFoncnom(String foncnom) {
-        this.foncnom = foncnom;
+    public void setIdfonc(Long idfonc) {
+        this.idfonc = idfonc;
     }
 }

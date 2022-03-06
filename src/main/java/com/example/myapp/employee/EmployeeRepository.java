@@ -10,7 +10,11 @@ import java.util.Optional;
 public interface EmployeeRepository
         extends JpaRepository<Employee,Long> {
 @Query("SELECT s FROM Employee s where s.nom = ?1")
-Employee findEmployeeByNom(String nom);
 
-    Optional <Employee> findEmployeeById(Long id);
+Optional <Employee> findEmployeeByNom(String nom);
+Employee findEmployeeById(Long id);
+
+    boolean existsByNom(String nom);
+    void deleteByNom(String nom);
+
 }

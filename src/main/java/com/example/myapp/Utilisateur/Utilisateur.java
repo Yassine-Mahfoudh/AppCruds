@@ -1,8 +1,14 @@
 package com.example.myapp.Utilisateur;
 
+import com.example.myapp.Fonctionalite.Fonctionalite;
+import com.example.myapp.Profil.Profil;
 import com.example.myapp.employee.Employee;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table
@@ -24,23 +30,32 @@ public class Utilisateur {
     @OneToOne
     @JoinColumn(name = "employee_fk",referencedColumnName = "id")
     private Employee employee;
+//    @ManyToMany(fetch = EAGER )
+//    private Collection<Profil> profils = new ArrayList<>();
 
     public Utilisateur() {
-    }
-
-    public Utilisateur(String login, String motDePasse, String email) {
-        this.login = login;
-        MotDePasse = motDePasse;
-        this.email = email;
     }
 
     public Utilisateur(Long id, String login, String motDePasse, String email) {
         this.id = id;
         this.login = login;
-        this.MotDePasse = motDePasse;
+        MotDePasse = motDePasse;
         this.email = email;
-
     }
+
+    public Utilisateur(String login, String motDePasse, String email ) {
+        this.login = login;
+        MotDePasse = motDePasse;
+        this.email = email;
+    }
+
+//    public Collection<Profil> getProfils() {
+//        return profils;
+//    }
+
+//    public void setProfils(Collection<Profil> profils) {
+//        this.profils = profils;
+//    }
 
     public String getLogin() {
         return login;

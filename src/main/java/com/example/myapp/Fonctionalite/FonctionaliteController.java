@@ -20,14 +20,14 @@ public class FonctionaliteController {
         return fonctionaliteService.getFonctionalites();
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Fonctionalite> addFonctionalite(@RequestBody Fonctionalite fonctionalite){
-//        Fonctionalite newFonctionalite=fonctionaliteService.addNewFonctionalite(fonctionalite);
-//        return new ResponseEntity<>(newFonctionalite , HttpStatus.CREATED);
-//    }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteFonctionalite(@PathVariable("id") Long id) {
-        fonctionaliteService.deleteFonctionalite(id);
+    @PostMapping("/add")
+    public ResponseEntity<Fonctionalite> addFonctionalite(@RequestBody Fonctionalite fonctionalite){
+        Fonctionalite newFonctionalite=fonctionaliteService.addNewFonctionalite(fonctionalite);
+        return new ResponseEntity<>(newFonctionalite , HttpStatus.CREATED);
+    }
+    @DeleteMapping("/delete/{nom}")
+    public ResponseEntity<?> deleteFonctionalite(@PathVariable("nom") String nom) {
+        fonctionaliteService.deleteFonctionalite(nom);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/update")
@@ -36,9 +36,9 @@ public class FonctionaliteController {
         return new ResponseEntity<>(updateFonctionalite, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Fonctionalite> getFonctionaliteById (@PathVariable("id") Long id) {
-        Fonctionalite fonctionalite = fonctionaliteService.findFonctionaliteById(id);
+    @GetMapping("/find/{nom}")
+    public ResponseEntity<Fonctionalite> getFonctionaliteByNom (@PathVariable("nom") String  nom) {
+        Fonctionalite fonctionalite = fonctionaliteService.findFonctionaliteByNom(nom);
         return new ResponseEntity<>(fonctionalite, HttpStatus.OK);
     }
 }

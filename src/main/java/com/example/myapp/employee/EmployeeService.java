@@ -13,29 +13,33 @@ public class EmployeeService {
     public final EmployeeRepository employeeRepository;
 @Autowired
     public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+
+    this.employeeRepository = employeeRepository;
     }
 
     public List<Employee> getEmployees(){
-        return employeeRepository.findAll();
+
+    return employeeRepository.findAll();
     }
 
-//    public Employee addNewEmployee(Employee employee) {
-//    Optional<Employee> employeeOptional = employeeRepository
-//            .findEmployeeByNom(employee.getNom());
-//    if (employeeOptional.isPresent()){
-//        throw new IllegalStateException("nom token");
-//    }
-//     return employeeRepository.save(employee);
-//    }
-    public void deleteEmployee(Long id){
-    employeeRepository.findById(id);
-    boolean exists=employeeRepository.existsById(id);
+    public Employee addNewEmployee(Employee employee) {
+    Optional<Employee> employeeOptional = employeeRepository
+            .findEmployeeByNom(employee.getNom());
+    if (employeeOptional.isPresent()){
+        throw new IllegalStateException("nom token");
+    }
+     return employeeRepository.save(employee);
+    }
+    @Transactional
+
+    public void deleteEmployee(String nom){
+    employeeRepository.findEmployeeByNom(nom);
+    boolean exists=employeeRepository.existsByNom(nom);
         if (!exists){
             throw new IllegalStateException(
-                    "employee with id "+ id + " does not exists");
+                    "employee with nom "+ nom + " does not exists");
         }
-        employeeRepository.deleteById(id);
+        employeeRepository.deleteByNom(nom);
     }
 @Transactional
 public Employee updateEmployee(Employee employee) {
@@ -43,9 +47,9 @@ public Employee updateEmployee(Employee employee) {
     return employeeRepository.save(employee);
 }
 
-    public Employee findEmployeeById(Long id) {
-        return employeeRepository.findEmployeeById(id)
-                .orElseThrow(() -> new IllegalStateException("User by id " + id + " was not found"));
+    public Employee findEmployeeByNom(String nom) {
+        return employeeRepository.findEmployeeByNom(nom)
+                .orElseThrow(() -> new IllegalStateException("Employee by nom " + nom + " was not found"));
     }
 
 

@@ -22,14 +22,14 @@ public class EmployeeController {
        return employeeService.getEmployees();
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
-//        Employee newEmployee=employeeService.addNewEmployee(employee);
-//        return new ResponseEntity<>(newEmployee ,HttpStatus.CREATED);
-//    }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
-        employeeService.deleteEmployee(id);
+    @PostMapping("/add")
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+        Employee newEmployee=employeeService.addNewEmployee(employee);
+        return new ResponseEntity<>(newEmployee ,HttpStatus.CREATED);
+    }
+    @DeleteMapping("/delete/{nom}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("nom") String nom) {
+        employeeService.deleteEmployee(nom);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/update")
@@ -38,9 +38,9 @@ public class EmployeeController {
         return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Employee> getEmployeeById (@PathVariable("id") Long id) {
-        Employee employee = employeeService.findEmployeeById(id);
+    @GetMapping("/find/{nom}")
+    public ResponseEntity<Employee> getEmployeeByNom (@PathVariable("nom") String nom) {
+        Employee employee = employeeService.findEmployeeByNom(nom);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 

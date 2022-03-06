@@ -21,22 +21,23 @@ public class FonctionaliteService {
     public Fonctionalite saveFonctionalite(Fonctionalite fonctionalite) {
         return fonctionaliteRepository.save(fonctionalite);
     }
-//    public Fonctionalite addNewFonctionalite(Fonctionalite fonctionalite) {
-//        Optional<Fonctionalite> fonctionaliteOptional = fonctionaliteRepository
-//                .findFonctionaliteByNom(fonctionalite.getNom());
-//        if (fonctionaliteOptional.isPresent()){
-//            throw new IllegalStateException("nom token");
-//        }
-//        return fonctionaliteRepository.save(fonctionalite);
-//    }
-    public void deleteFonctionalite(Long id){
-        fonctionaliteRepository.findById(id);
-        boolean exists=fonctionaliteRepository.existsById(id);
+    public Fonctionalite addNewFonctionalite(Fonctionalite fonctionalite) {
+        Optional<Fonctionalite> fonctionaliteOptional = fonctionaliteRepository
+                .findFonctionaliteByNom(fonctionalite.getNom());
+        if (fonctionaliteOptional.isPresent()){
+            throw new IllegalStateException("nom token");
+        }
+        return fonctionaliteRepository.save(fonctionalite);
+    }
+    @Transactional
+    public void deleteFonctionalite(String nom){
+        fonctionaliteRepository.findFonctionaliteByNom(nom);
+        boolean exists=fonctionaliteRepository.existsByNom(nom);
         if (!exists){
             throw new IllegalStateException(
-                    "fonctionalite with id "+ id + " does not exists");
+                    "fonctionalite with name "+ nom + " does not exists");
         }
-        fonctionaliteRepository.deleteById(id);
+        fonctionaliteRepository.deleteByNom(nom);
     }
     @Transactional
     public Fonctionalite updateFonctionalite(Fonctionalite fonctionalite) {
@@ -44,9 +45,9 @@ public class FonctionaliteService {
         return fonctionaliteRepository.save(fonctionalite);
     }
 
-    public Fonctionalite findFonctionaliteById(Long id) {
-        return fonctionaliteRepository.findFonctionaliteById(id)
-                .orElseThrow(() -> new IllegalStateException("Fonctionalite by id " + id + " was not found"));
+    public Fonctionalite findFonctionaliteByNom(String nom) {
+        return fonctionaliteRepository.findFonctionaliteByNom(nom)
+                .orElseThrow(() -> new IllegalStateException("Fonctionalite by nom " + nom + " was not found"));
     }
 
 }

@@ -9,7 +9,11 @@ import java.util.Optional;
 @Repository
 public interface FonctionaliteRepository extends JpaRepository<Fonctionalite,Long> {
 @Query("SELECT s FROM Fonctionalite s where s.nom = ?1")
-Fonctionalite findFonctionaliteByNom(String nom);
+Optional <Fonctionalite> findFonctionaliteByNom(String nom);
 
-        Optional <Fonctionalite> findFonctionaliteById(Long id);
+         Fonctionalite findFonctionaliteById(Long id);
+
+
+        boolean existsByNom(String nom);
+        void deleteByNom(String nom);
 }

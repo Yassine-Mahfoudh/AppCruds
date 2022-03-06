@@ -23,14 +23,14 @@ public class UtilisateurController {
         return utilisateurService.getUtilisateurs();
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Utilisateur> addUtilisateur(@RequestBody Utilisateur utilisateur){
-//        Utilisateur newUtilisateur=utilisateurService.addNewUtilisateur(utilisateur);
-//        return new ResponseEntity<>(newUtilisateur ,HttpStatus.CREATED);
-//    }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUtilisateur(@PathVariable("id") Long id) {
-        utilisateurService.deleteUtilisateur(id);
+    @PostMapping("/add")
+    public ResponseEntity<Utilisateur> addUtilisateur(@RequestBody Utilisateur utilisateur){
+        Utilisateur newUtilisateur=utilisateurService.addNewUtilisateur(utilisateur);
+        return new ResponseEntity<>(newUtilisateur ,HttpStatus.CREATED);
+    }
+    @DeleteMapping("/delete/{login}")
+    public ResponseEntity<?> deleteUtilisateur(@PathVariable("login") String login) {
+        utilisateurService.deleteUtilisateur(login);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/update")
@@ -39,36 +39,61 @@ public class UtilisateurController {
         return new ResponseEntity<>(updateUtilisateur, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Utilisateur> getUtilisateurById (@PathVariable("id") Long id) {
-        Utilisateur utilisateur = utilisateurService.findUtilisateurById(id);
+    @GetMapping("/find/{login}")
+    public ResponseEntity<Utilisateur> getUtilisateurByLogin (@PathVariable("login") String login) {
+        Utilisateur utilisateur = utilisateurService.findUtilisateurByLogin(login);
         return new ResponseEntity<>(utilisateur, HttpStatus.OK);
     }
 
     @PostMapping("/employee/addtoutilisateur")
     public ResponseEntity<?> addEmpToUtilisateur(@RequestBody EmpToUtilisateurForm form){
-        utilisateurService.addEmpToUtilisateur(form.getNom(),form.getLogin());
+        utilisateurService.addEmpToUtilisateur(form.getIdemp(),form.getIdU());
         return ResponseEntity.ok().build();
     }
-
+//    @PostMapping("/profil/addtoutilisateur")
+//    public ResponseEntity<?> addProfilToUtilisateur(@RequestBody ProfilToUtilisateurForm form){
+//        utilisateurService.addProfilToUtilisateur(form.getIdprofil(),form.getIdU());
+//        return ResponseEntity.ok().build();
+//    }
 }
 class EmpToUtilisateurForm {
-    private String nom;
-    private String login;
+    private Long idemp;
+    private Long idU;
 
-    public String getLogin() {
-        return login;
+    public Long getIdemp() {
+        return idemp;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setIdemp(Long idemp) {
+        this.idemp = idemp;
     }
 
-    public String getNom() {
-        return nom;
+    public Long getIdU() {
+        return idU;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setIdU(Long idU) {
+        this.idU = idU;
     }
 }
+//class ProfilToUtilisateurForm {
+//    private Long idprofil;
+//    private Long idU;
+//
+//    public Long getIdprofil() {
+//        return idprofil;
+//    }
+//
+//    public void setIdprofil(Long idprofil) {
+//        this.idprofil = idprofil;
+//    }
+//
+//    public Long getIdU() {
+//        return idU;
+//    }
+//
+//    public void setIdU(Long idU) {
+//        this.idU = idU;
+//    }
+//}
+
