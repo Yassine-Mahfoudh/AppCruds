@@ -1,6 +1,7 @@
 package com.example.myapp.Demande;
 
 import com.example.myapp.EtatDemande.EtatDemande;
+import com.example.myapp.TypeDemande.TypeDemande;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,7 @@ public interface DemandeRepository
     Demande findDemandeById(Long id);
     @Query("SELECT dem.etatDemandes FROM Demande dem where dem.id = ?1")
     List<EtatDemande> getEtatbyDemande(Long id);
+
+    @Query("SELECT dem.typeDemandes FROM Demande dem where dem.id = ?1")
+    List<TypeDemande> getTypebyDemande(Long id);
 }

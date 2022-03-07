@@ -1,21 +1,26 @@
 package com.example.myapp.employee;
 
+import com.example.myapp.Demande.Demande;
+
+import com.example.myapp.Demande.DemandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class EmployeeService {
     public final EmployeeRepository employeeRepository;
+    public final DemandeRepository demandeRepository;
 @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, DemandeRepository demandeRepository) {
 
     this.employeeRepository = employeeRepository;
-    }
+    this.demandeRepository = demandeRepository;
+}
 
     public List<Employee> getEmployees(){
 
@@ -50,6 +55,17 @@ public Employee updateEmployee(Employee employee) {
     public Employee findEmployeeByNom(String nom) {
         return employeeRepository.findEmployeeByNom(nom)
                 .orElseThrow(() -> new IllegalStateException("Employee by nom " + nom + " was not found"));
+    }
+    public Set<Demande> getDemandebyEmployee(String nom) {
+
+        return employeeRepository.getDemandebyEmployee(nom);
+    }
+
+    public void addDemandeToEmployee(Long idemp, Long iddem) {
+        Employee employee = employeeRepository.findEmployeeById(idemp);
+        Demande demande = demandeRepository.findDemandeById(iddem);
+        employee.getDemandes().add(demande);
+        employeeRepository.save(employee);
     }
 
 

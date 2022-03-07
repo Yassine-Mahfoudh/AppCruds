@@ -12,7 +12,6 @@ package com.example.myapp.Departement;
 public interface DepartementRepository
         extends JpaRepository<Departement,Long> {
     @Query("SELECT dep FROM Departement dep where dep.nom = ?1")
-
     Optional <Departement> findDepartementByNom(String nom);
     boolean existsByNom(String nom);
     void deleteByNom(String nom);

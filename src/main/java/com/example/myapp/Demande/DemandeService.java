@@ -1,9 +1,9 @@
 package com.example.myapp.Demande;
 
-import com.example.myapp.Departement.Departement;
 import com.example.myapp.EtatDemande.EtatDemande;
 import com.example.myapp.EtatDemande.EtatDemandeRepository;
-import com.example.myapp.salle.Salle;
+import com.example.myapp.TypeDemande.TypeDemande;
+import com.example.myapp.TypeDemande.TypeDemandeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,10 +14,13 @@ import java.util.Optional;
 public class DemandeService {
     public final DemandeRepository demandeRepository;
     public final EtatDemandeRepository etatDemandeRepository;
+    public final TypeDemandeRepository typeDemandeRepository;
 
-    public DemandeService(DemandeRepository demandeRepository,EtatDemandeRepository etatDemandeRepository) {
+    public DemandeService(DemandeRepository demandeRepository, EtatDemandeRepository etatDemandeRepository, TypeDemandeRepository typeDemandeRepository) {
         this.demandeRepository = demandeRepository;
         this.etatDemandeRepository =etatDemandeRepository;
+
+        this.typeDemandeRepository = typeDemandeRepository;
     }
 
     public List<Demande> getDemande(){
@@ -62,6 +65,17 @@ public class DemandeService {
         EtatDemande etatDemande = etatDemandeRepository.findEtatDemandeById(idetat);
         demande.getEtatDemandes().add(etatDemande);
         demandeRepository.save(demande);
+    }
+
+    public void addTypeToDemande(Long iddem, Long idtype) {
+        Demande demande = demandeRepository.findDemandeById(iddem);
+        TypeDemande typeDemande = typeDemandeRepository.findTypeDemandeById(idtype);
+        demande.getTypeDemandes().add(typeDemande);
+        demandeRepository.save(demande);
+    }
+
+    public List<TypeDemande> getTypebyDemande(Long id) {
+        return demandeRepository.getTypebyDemande(id);
     }
 
 

@@ -2,10 +2,15 @@ package com.example.myapp.employee;
 
 
 
+import com.example.myapp.Demande.Demande;
 import com.example.myapp.Utilisateur.Utilisateur;
+import com.example.myapp.salle.Salle;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table
@@ -29,11 +34,14 @@ public class Employee {
     private String adresse;
     @OneToOne(mappedBy = "employee")
     private Utilisateur utilisateur;
-    public Employee() {
-    }
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "dep_id")
+    private Set<Demande> demandes;
 
     public Employee(Long id, String nom, String prenom,
-                    LocalDate datenaiss, String adresse, String role, Boolean etat) {
+                    LocalDate datenaiss, String adresse, String role,Boolean etat ) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -42,15 +50,24 @@ public class Employee {
         this.role=role;
         this.etat=etat;
     }
-
-    public Employee(String nom, String prenom,
-                    LocalDate datenaiss, String adresse, String role, Boolean etat) {
+    public Employee() {
+    }
+    public Employee(String nom, String prenom,LocalDate datenaiss,String adresse, String role,Boolean etat) {
         this.nom = nom;
         this.prenom = prenom;
+        this.role = role;
         this.datenaiss = datenaiss;
         this.adresse = adresse;
-        this.role=role;
         this.etat=etat;
+
+    }
+
+    public Boolean getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Boolean etat) {
+        this.etat = etat;
     }
 
     public Long getId() {
@@ -101,12 +118,13 @@ public class Employee {
         this.role = role;
     }
 
-    public Boolean getEtat() {
-        return etat;
+
+    public Set<Demande> getDemandes() {
+        return demandes;
     }
 
-    public void setEtat(Boolean etat) {
-        this.etat = etat;
+    public void setDemandes(Set<Demande> demandes) {
+        this.demandes = demandes;
     }
 
     @Override
@@ -117,6 +135,7 @@ public class Employee {
                 ", prenom='" + prenom + '\'' +
                 ", datenaiss=" + datenaiss +
                 ", adresse='" + adresse + '\'' +
+                ", etat='"+etat+
                 '}';
     }
 }

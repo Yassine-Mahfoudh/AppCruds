@@ -1,11 +1,14 @@
 package com.example.myapp.employee;
 
+import com.example.myapp.Demande.Demande;
+import com.example.myapp.salle.Salle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -52,4 +55,38 @@ public class EmployeeController {
         employeeService.updateEmployee(id,nom,adresse);
         return new ResponseEntity<>(HttpStatus.OK);
     }*/
+
+    @GetMapping("/find/{nom}/demandes")
+    public Set<Demande> getDemandebyEmployee(@PathVariable("nom") String nom) {
+        return employeeService.getDemandebyEmployee(nom);
+    }
+
+    @PostMapping("/demande/addtoemp")
+    public ResponseEntity<?> addDemandeToEmployee(@RequestBody DemandeToEmpForm form){
+        employeeService.addDemandeToEmployee(form.getIdemp(),form.getIddem());
+        return ResponseEntity.ok().build();
+    }
+
 }
+class DemandeToEmpForm {
+    private Long idemp;
+    private Long iddem;
+
+    public Long getIdemp() {
+        return idemp;
+    }
+
+    public void setIdemp(Long idemp) {
+        this.idemp = idemp;
+    }
+
+    public Long getIddem() {
+        return iddem;
+    }
+
+    public void setIddem(Long iddem) {
+        this.iddem = iddem;
+    }
+}
+
+

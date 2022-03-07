@@ -35,6 +35,7 @@ public class UtilisateurConfig {
                     "employee",
                     Boolean.TRUE
             );
+
             employeeRepository.saveAll(
                     List.of(yassine,houssem)
             );

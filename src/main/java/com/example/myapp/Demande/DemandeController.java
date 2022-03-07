@@ -1,6 +1,7 @@
 package com.example.myapp.Demande;
 
 import com.example.myapp.EtatDemande.EtatDemande;
+import com.example.myapp.TypeDemande.TypeDemande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,15 @@ public class DemandeController {
         demandeService.addEtatToDem(form.getIddem(),form.getIdetat());
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/find/{id}/typedemande")
+    public List<TypeDemande> getTypebyDemande(@PathVariable("id") Long id) {
+        return demandeService.getTypebyDemande(id); }
+
+    @PostMapping("/type/addtodem")
+    public ResponseEntity<?> addTypeToDemande(@RequestBody TypeToDemandeForm form){
+        demandeService.addTypeToDemande(form.getIddem(),form.getIdtype());
+        return ResponseEntity.ok().build();
+    }
 
 }
 class EtatToDemandeForm{
@@ -75,5 +85,25 @@ class EtatToDemandeForm{
 
     public void setIdetat(Long idetat) {
         this.idetat = idetat;
+    }
+}
+class TypeToDemandeForm{
+    private Long iddem;
+    private Long idtype;
+
+    public Long getIddem() {
+        return iddem;
+    }
+
+    public void setIddem(Long iddem) {
+        this.iddem = iddem;
+    }
+
+    public Long getIdtype() {
+        return idtype;
+    }
+
+    public void setIdtype(Long idtype) {
+        this.idtype = idtype;
     }
 }

@@ -1,7 +1,10 @@
 package com.example.myapp.Demande;
 
 import com.example.myapp.EtatDemande.EtatDemande;
+import com.example.myapp.TypeDemande.TypeDemande;
 import com.example.myapp.salle.Salle;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,6 +36,11 @@ public class Demande implements Serializable {
     @JoinColumn(name = "dem_id")
     private Set<EtatDemande>  etatDemandes;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinColumn(name = "dem_id")
+    private Set<TypeDemande>  typeDemandes;
+
 
     public Demande(Long id, String nom, String motif, LocalDate datecreation, LocalDate datedebut, LocalDate datefin) {
         this.id = id;
@@ -51,7 +59,13 @@ public class Demande implements Serializable {
         this.datefin = datefin;
     }
 
+    public Set<TypeDemande> getTypeDemandes() {
+        return typeDemandes;
+    }
 
+    public void setTypeDemandes(Set<TypeDemande> typeDemandes) {
+        this.typeDemandes = typeDemandes;
+    }
 
     public Set<EtatDemande> getEtatDemandes() {
         return etatDemandes;
