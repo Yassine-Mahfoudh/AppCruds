@@ -32,14 +32,14 @@ public class DemandeService {
         }
         return demandeRepository.save(demande);
     }
-    public void deleteDemande(Long id){
-        demandeRepository.findById(id);
-        boolean exists= demandeRepository.existsById(id);
+    public void deleteDemande(String nom){
+        demandeRepository.findDemandeByNom(nom);
+        boolean exists= demandeRepository.existsByNom(nom);
         if (!exists){
             throw new IllegalStateException(
-                    "demande with id "+ id + " does not exists");
+                    "demande with name "+ nom + " does not exists");
         }
-        demandeRepository.deleteById(id);
+        demandeRepository.deleteByNom(nom);
     }
     @Transactional
     public Demande updateDemande(Demande demande) {

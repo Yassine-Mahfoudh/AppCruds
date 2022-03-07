@@ -28,9 +28,9 @@ public class DemandeController {
         Demande newDemande = demandeService.addNewDemande(demande);
         return new ResponseEntity<>(newDemande, HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteDemande(@PathVariable("id") Long id) {
-        demandeService.deleteDemande(id);
+    @DeleteMapping("/delete/{nom}")
+    public ResponseEntity<?> deleteDemande(@PathVariable("nom") String nom) {
+        demandeService.deleteDemande(nom);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/update")
