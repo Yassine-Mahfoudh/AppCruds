@@ -54,7 +54,7 @@ public Projet updateProjet(Projet projet) {
                 .orElseThrow(() -> new IllegalStateException("project by name " + nom + " was not found"));
     }
 
-    public List<Salle> getEmpByProjet(String nom) {
+    public List<Employee> getEmpByProjet(String nom) {
 
         return projetRepository.getEmpbyProjet(nom);
     }

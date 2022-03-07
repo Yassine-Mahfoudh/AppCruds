@@ -1,6 +1,7 @@
 package com.example.myapp.Projet;
 
 
+import com.example.myapp.employee.Employee;
 import com.example.myapp.salle.Salle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,8 +45,8 @@ public class ProjetController {
         return new ResponseEntity<>(projet, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{nom}/Projet")
-    public List<Salle> getEmpbyProjet(@PathVariable("nom") String nom) {
+    @GetMapping("/find/{nom}/employees")
+    public List<Employee> getEmpbyProjet(@PathVariable("nom") String nom) {
         return projetService.getEmpByProjet(nom); }
 
     @PostMapping("/emp/addtoprojet")

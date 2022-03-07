@@ -1,5 +1,6 @@
 package com.example.myapp.salle;
 
+import com.example.myapp.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,4 +45,34 @@ public class SalleController {
         return new ResponseEntity<>(salle, HttpStatus.OK);
     }
 
+    @GetMapping("/find/{num}/employees")
+    public List<Employee> getEmpbySalle(@PathVariable("num") int num) {
+        return salleService.getEmpBySalle(num); }
+
+    @PostMapping("/emp/addtosalle")
+    public ResponseEntity<?> addEmpToSalle(@RequestBody EmpToSalleForm form){
+        salleService.addEmpToSalle(form.getIdsalle(),form.getIdemp());
+        return ResponseEntity.ok().build();
+    }
+
+}
+class EmpToSalleForm{
+    private Long idsalle;
+    private Long idemp;
+
+    public Long getIdsalle() {
+        return idsalle;
+    }
+
+    public void setIdsalle(Long idsalle) {
+        this.idsalle = idsalle;
+    }
+
+    public Long getIdemp() {
+        return idemp;
+    }
+
+    public void setIdemp(Long idemp) {
+        this.idemp = idemp;
+    }
 }

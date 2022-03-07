@@ -1,7 +1,10 @@
 package com.example.myapp.salle;
 
+import com.example.myapp.employee.Employee;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table
@@ -22,6 +25,10 @@ public class Salle implements Serializable {
     private int nbposte;
     private int pourcentagePres;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "salle_id")
+    private Set<Employee> employees;
 
     public Salle(String type, int num, int nbposte, int pourcentagePres) {
         this.type = type;
@@ -39,6 +46,14 @@ public class Salle implements Serializable {
     }
 
     public Salle() {
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     public Long getId() {

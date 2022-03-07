@@ -1,5 +1,7 @@
 package com.example.myapp.salle;
 
+import com.example.myapp.employee.Employee;
+import com.example.myapp.employee.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -9,9 +11,11 @@ import java.util.Optional;
 @Service
 public class SalleService {
     public final SalleRepository salleRepository;
+    public final EmployeeRepository employeeRepository;
 
-    public SalleService(SalleRepository salleRepository) {
+    public SalleService(SalleRepository salleRepository, EmployeeRepository employeeRepository) {
         this.salleRepository = salleRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     public List<Salle> getSalle(){
@@ -45,6 +49,17 @@ public class SalleService {
     public Salle findSalleByNum(int num) {
         return salleRepository.findSalleByNum(num)
                 .orElseThrow(() -> new IllegalStateException(" salle with num " + num + " does not exists"));
+    }
+
+    public List<Employee> getEmpBySalle(int num) {
+
+        return salleRepository.getEmpbySalle(num);
+    }
+    public void addEmpToSalle(Long idsalle, Long idemp) {
+        Salle salle = salleRepository.findSalleById(idsalle);
+        Employee employee = employeeRepository.findEmployeeById(idemp);
+        salle.getEmployees().add(employee);
+        salleRepository.save(salle);
     }
 
 }

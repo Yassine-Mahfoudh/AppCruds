@@ -1,5 +1,6 @@
 package com.example.myapp.Projet;
 
+import com.example.myapp.employee.Employee;
 import com.example.myapp.salle.Salle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,6 @@ Optional<Projet> findProjetByNom(String nom);
     boolean existsByNom(String nom);
     void deleteByNom(String nom);
     @Query("SELECT p.employees FROM Projet p where p.nom = ?1")
-    List<Salle> getEmpbyProjet(String nom);
+    List<Employee> getEmpbyProjet(String nom);
 
 }
