@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/demande")
@@ -28,21 +29,18 @@ public class DemandeController {
 
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Demande> addNewDemande(@RequestBody Demande demande){
-//        Demande newDemande = iDemandeService.addNewDemande(demande);
-//        return new ResponseEntity<>(newDemande, HttpStatus.CREATED);
-//    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteDemande(@PathVariable("id") Long id) {
         iDemandeService.deleteDemande(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-//    @PutMapping("/update")
-//    public ResponseEntity<Demande> updateDemande(@RequestBody Demande demande) {
-//        Demande updateDemande = iDemandeService.updateDemande(demande);
-//        return new ResponseEntity<>(updateDemande, HttpStatus.OK);
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Demande> updateDemande(@RequestBody Demande demande,@PathVariable("id") Long id) {
+        Demande updateDemande = iDemandeService.updateDemande(demande,id);
+        return new ResponseEntity<>(updateDemande, HttpStatus.OK);
+
+    }
 
     @PostMapping(value="/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Demande saveDemande( @RequestBody Demande demande) {

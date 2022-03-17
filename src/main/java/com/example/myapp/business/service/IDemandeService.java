@@ -9,9 +9,8 @@ public interface IDemandeService {
 
     public List<Demande> getListDemande();
 
-//    public Demande addNewDemande(Demande demande);
     public void deleteDemande(Long id);
-//    public Demande updateDemande(Demande demande);
+    public Demande updateDemande(Demande demande,Long id);
 
     public Demande saveDemande(Demande dem);
 

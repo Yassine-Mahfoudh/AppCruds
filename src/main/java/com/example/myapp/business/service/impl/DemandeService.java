@@ -47,10 +47,7 @@ public class DemandeService implements IDemandeService {
         Demande d = demandeRepository.findDemandeById(id);
     demandeRepository.delete(d);
     }
-//    @Override
-//    public Demande updateDemande(Demande demande) {
-//        return demandeRepository.save(demande);
-//    }
+
 
     @Transactional
     @Override
@@ -61,11 +58,19 @@ public class DemandeService implements IDemandeService {
             if ( objNomUnique != null)
                 throw new IllegalStateException("Demandee name token");
 
-                dem.setDatecreation(new Timestamp(new Date().getTime()));
-                
             return demandeRepository.save(dem);
         } catch (Exception e) {
             throw new IllegalStateException("erreur"+e);
         }
+    }
+
+    @Override
+    public Demande updateDemande(Demande demande,Long id) {
+        Demande updem = demandeRepository.findDemandeById(id);
+                updem=demande;
+                updem.setId(id);
+
+        return demandeRepository.save(updem);
+
     }
 }
