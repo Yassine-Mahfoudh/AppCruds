@@ -1,16 +1,18 @@
 package com.example.myapp.business.service.impl;
 
-import antlr.Utils;
-import ch.qos.logback.classic.pattern.Util;
+
 import com.example.myapp.business.service.IDemandeService;
 import com.example.myapp.persistence.model.Demande;
 import com.example.myapp.persistence.repository.DemandeRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
+
+import java.util.Date;
 import java.util.List;
+
 
 @AllArgsConstructor
 @Service
@@ -34,21 +36,36 @@ public class DemandeService implements IDemandeService {
         return demandeRepository.findAll();
     }
 
-    @Override
-    public Demande addNewDemande(Demande demande) {
-        return demandeRepository.save(demande);
-    }
+//    @Override
+//    public Demande addNewDemande(Demande demande) {
+//        return demandeRepository.save(demande);
+//    }
+//
     @Transactional
-
     @Override
     public void deleteDemande(Long id) {
         Demande d = demandeRepository.findDemandeById(id);
     demandeRepository.delete(d);
     }
-    @Transactional
+//    @Override
+//    public Demande updateDemande(Demande demande) {
+//        return demandeRepository.save(demande);
+//    }
 
+    @Transactional
     @Override
-    public Demande updateDemande(Demande demande) {
-        return demandeRepository.save(demande);
+    public Demande saveDemande(Demande dem) {
+        try {
+            Demande objNomUnique = demandeRepository.findDemandeByNom(dem.getNom());
+//
+            if ( objNomUnique != null)
+                throw new IllegalStateException("Demandee name token");
+
+                dem.setDatecreation(new Timestamp(new Date().getTime()));
+                
+            return demandeRepository.save(dem);
+        } catch (Exception e) {
+            throw new IllegalStateException("erreur"+e);
+        }
     }
 }
