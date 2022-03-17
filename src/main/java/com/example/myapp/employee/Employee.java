@@ -2,9 +2,8 @@ package com.example.myapp.employee;
 
 
 
-import com.example.myapp.Demande.Demande;
 import com.example.myapp.Utilisateur.Utilisateur;
-import com.example.myapp.salle.Salle;
+import com.example.myapp.persistence.model.Demande;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -37,7 +36,7 @@ public class Employee {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dep_id")
+    @JoinColumn(name = "emp_id")
     private Set<Demande> demandes;
 
     public Employee(Long id, String nom, String prenom,

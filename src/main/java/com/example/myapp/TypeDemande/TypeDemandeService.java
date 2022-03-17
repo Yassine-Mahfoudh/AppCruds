@@ -1,6 +1,7 @@
 package com.example.myapp.TypeDemande;
 
 
+import com.example.myapp.persistence.model.TypeDemande;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

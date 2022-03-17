@@ -1,40 +1,41 @@
 package com.example.myapp.employee;
 
-import com.example.myapp.Demande.Demande;
-import com.example.myapp.salle.Salle;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 
 @RestController
 @RequestMapping(path = "/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
-@Autowired
+
+    @Autowired
     public EmployeeController(EmployeeService employeeService) {
-        this.employeeService =  employeeService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping
     public List<Employee> getEmployees() {
-       return employeeService.getEmployees();
+        return employeeService.getEmployees();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
-        Employee newEmployee=employeeService.addNewEmployee(employee);
-        return new ResponseEntity<>(newEmployee ,HttpStatus.CREATED);
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+        Employee newEmployee = employeeService.addNewEmployee(employee);
+        return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
     }
+
     @DeleteMapping("/delete/{nom}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("nom") String nom) {
         employeeService.deleteEmployee(nom);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("/update")
     public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
         Employee updateEmployee = employeeService.updateEmployee(employee);
@@ -42,11 +43,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/find/{nom}")
-    public ResponseEntity<Employee> getEmployeeByNom (@PathVariable("nom") String nom) {
+    public ResponseEntity<Employee> getEmployeeByNom(@PathVariable("nom") String nom) {
         Employee employee = employeeService.findEmployeeByNom(nom);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
-
+}
     /*@PutMapping(path = "{id}")
     public ResponseEntity<Employee> updateEmployee(
             @PathVariable("id") Long id,
@@ -56,37 +57,37 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }*/
 
-    @GetMapping("/find/{nom}/demandes")
-    public Set<Demande> getDemandebyEmployee(@PathVariable("nom") String nom) {
-        return employeeService.getDemandebyEmployee(nom);
-    }
-
-    @PostMapping("/demande/addtoemp")
-    public ResponseEntity<?> addDemandeToEmployee(@RequestBody DemandeToEmpForm form){
-        employeeService.addDemandeToEmployee(form.getIdemp(),form.getIddem());
-        return ResponseEntity.ok().build();
-    }
-
-}
-class DemandeToEmpForm {
-    private Long idemp;
-    private Long iddem;
-
-    public Long getIdemp() {
-        return idemp;
-    }
-
-    public void setIdemp(Long idemp) {
-        this.idemp = idemp;
-    }
-
-    public Long getIddem() {
-        return iddem;
-    }
-
-    public void setIddem(Long iddem) {
-        this.iddem = iddem;
-    }
-}
-
-
+//    @GetMapping("/find/{nom}/demandes")
+//    public Set<Demande> getDemandebyEmployee(@PathVariable("nom") String nom) {
+//        return employeeService.getDemandebyEmployee(nom);
+//    }
+//
+//    @PostMapping("/demande/addtoemp")
+//    public ResponseEntity<?> addDemandeToEmployee(@RequestBody DemandeToEmpForm form){
+//        employeeService.addDemandeToEmployee(form.getIdemp(),form.getIddem());
+//        return ResponseEntity.ok().build();
+//    }
+//
+//}
+//class DemandeToEmpForm {
+//    private Long idemp;
+//    private Long iddem;
+//
+//    public Long getIdemp() {
+//        return idemp;
+//    }
+//
+//    public void setIdemp(Long idemp) {
+//        this.idemp = idemp;
+//    }
+//
+//    public Long getIddem() {
+//        return iddem;
+//    }
+//
+//    public void setIddem(Long iddem) {
+//        this.iddem = iddem;
+//    }
+//}
+//
+//

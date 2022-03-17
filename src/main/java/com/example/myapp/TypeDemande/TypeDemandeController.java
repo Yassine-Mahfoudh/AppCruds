@@ -1,6 +1,7 @@
 package com.example.myapp.TypeDemande;
 
-import com.example.myapp.EtatDemande.EtatDemande;
+import com.example.myapp.TypeDemande.TypeDemandeService;
+import com.example.myapp.persistence.model.TypeDemande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

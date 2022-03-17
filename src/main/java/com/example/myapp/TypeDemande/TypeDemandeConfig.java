@@ -1,6 +1,7 @@
 package com.example.myapp.TypeDemande;
 
 
+import com.example.myapp.persistence.model.TypeDemande;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
