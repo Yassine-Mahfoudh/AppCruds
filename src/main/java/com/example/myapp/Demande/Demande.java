@@ -2,7 +2,6 @@ package com.example.myapp.Demande;
 
 import com.example.myapp.EtatDemande.EtatDemande;
 import com.example.myapp.TypeDemande.TypeDemande;
-import com.example.myapp.salle.Salle;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 

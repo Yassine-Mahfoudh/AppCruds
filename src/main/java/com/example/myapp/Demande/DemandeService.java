@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class DemandeService {
+
     public final DemandeRepository demandeRepository;
     public final EtatDemandeRepository etatDemandeRepository;
     public final TypeDemandeRepository typeDemandeRepository;
@@ -35,6 +36,7 @@ public class DemandeService {
         }
         return demandeRepository.save(demande);
     }
+    @Transactional
     public void deleteDemande(String nom){
         demandeRepository.findDemandeByNom(nom);
         boolean exists= demandeRepository.existsByNom(nom);

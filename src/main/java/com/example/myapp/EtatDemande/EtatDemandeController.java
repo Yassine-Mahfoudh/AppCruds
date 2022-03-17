@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/etatDemande")
+@RequestMapping(path = "/etatdemande")
 public class EtatDemandeController {
     private final EtatDemandeService etatDemandeService;
     @Autowired

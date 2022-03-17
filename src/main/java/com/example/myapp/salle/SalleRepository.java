@@ -18,6 +18,6 @@ public interface SalleRepository
     void deleteByNum(int num);
 
     Salle findSalleById(Long id);
-    @Query("SELECT s.employees FROM Salle s where s.num = ?1")
-    List<Employee> getEmpbySalle(int num);
+//    @Query("SELECT s.employees FROM Salle s where s.num = ?1")
+//    List<Employee> getEmpbySalle(int num);
 }

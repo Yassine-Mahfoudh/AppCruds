@@ -23,22 +23,12 @@ public class SalleService {
     }
 
     public Salle addNewSalle(Salle Salle) {
-        Optional<Salle> SalleOptional = salleRepository
-                .findSalleByNum(Salle.getNum());
-        if (SalleOptional.isPresent()){
-            throw new IllegalStateException("num token");
-        }
         return salleRepository.save(Salle);
     }
     @Transactional
-    public void deleteSalle(int num){
-        salleRepository.findSalleByNum(num);
-        boolean exists= salleRepository.existsByNum(num);
-        if (!exists){
-            throw new IllegalStateException(
-                    "salle with num "+ num + " does not exists");
-        }
-        salleRepository.deleteByNum(num);
+    public void deleteSalle(Long id){
+
+        salleRepository.deleteById(id);
     }
     @Transactional
     public Salle updateSalle(Salle Salle) {
@@ -46,20 +36,19 @@ public class SalleService {
         return salleRepository.save(Salle);
     }
 
-    public Salle findSalleByNum(int num) {
-        return salleRepository.findSalleByNum(num)
-                .orElseThrow(() -> new IllegalStateException(" salle with num " + num + " does not exists"));
+    public Salle findSalleById(Long id) {
+        return salleRepository.findSalleById(id);
     }
 
-    public List<Employee> getEmpBySalle(int num) {
-
-        return salleRepository.getEmpbySalle(num);
-    }
-    public void addEmpToSalle(Long idsalle, Long idemp) {
-        Salle salle = salleRepository.findSalleById(idsalle);
-        Employee employee = employeeRepository.findEmployeeById(idemp);
-        salle.getEmployees().add(employee);
-        salleRepository.save(salle);
-    }
+//    public List<Employee> getEmpBySalle(int num) {
+//
+//        return salleRepository.getEmpbySalle(num);
+//    }
+//    public void addEmpToSalle(Long idsalle, Long idemp) {
+//        Salle salle = salleRepository.findSalleById(idsalle);
+//        Employee employee = employeeRepository.findEmployeeById(idemp);
+//        salle.getEmployees().add(employee);
+//        salleRepository.save(salle);
+//    }
 
 }

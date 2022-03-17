@@ -28,9 +28,9 @@ public class SalleController {
         Salle newSalle = salleService.addNewSalle(salle);
         return new ResponseEntity<>(newSalle, HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{num}")
-    public ResponseEntity<?> deleteSalle(@PathVariable("num") int num) {
-        salleService.deleteSalle(num);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteSalle(@PathVariable("id") Long id) {
+        salleService.deleteSalle(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/update")
@@ -39,40 +39,40 @@ public class SalleController {
         return new ResponseEntity<>(updateSalle, HttpStatus.OK);
     }
 
-   @GetMapping("/find/{num}")
-    public ResponseEntity<Salle> getSalleByNum (@PathVariable("num") int num) {
-        Salle salle = salleService.findSalleByNum(num);
+   @GetMapping("/find/{id}")
+    public ResponseEntity<Salle> getSalleById (@PathVariable("id") Long id) {
+        Salle salle = salleService.findSalleById(id);
         return new ResponseEntity<>(salle, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{num}/employees")
-    public List<Employee> getEmpbySalle(@PathVariable("num") int num) {
-        return salleService.getEmpBySalle(num); }
-
-    @PostMapping("/emp/addtosalle")
-    public ResponseEntity<?> addEmpToSalle(@RequestBody EmpToSalleForm form){
-        salleService.addEmpToSalle(form.getIdsalle(),form.getIdemp());
-        return ResponseEntity.ok().build();
-    }
+//    @GetMapping("/find/{num}/employees")
+//    public List<Employee> getEmpbySalle(@PathVariable("num") int num) {
+//        return salleService.getEmpBySalle(num); }
+//
+//    @PostMapping("/emp/addtosalle")
+//    public ResponseEntity<?> addEmpToSalle(@RequestBody EmpToSalleForm form){
+//        salleService.addEmpToSalle(form.getIdsalle(),form.getIdemp());
+//        return ResponseEntity.ok().build();
+//    }
 
 }
-class EmpToSalleForm{
-    private Long idsalle;
-    private Long idemp;
-
-    public Long getIdsalle() {
-        return idsalle;
-    }
-
-    public void setIdsalle(Long idsalle) {
-        this.idsalle = idsalle;
-    }
-
-    public Long getIdemp() {
-        return idemp;
-    }
-
-    public void setIdemp(Long idemp) {
-        this.idemp = idemp;
-    }
-}
+//class EmpToSalleForm{
+//    private Long idsalle;
+//    private Long idemp;
+//
+//    public Long getIdsalle() {
+//        return idsalle;
+//    }
+//
+//    public void setIdsalle(Long idsalle) {
+//        this.idsalle = idsalle;
+//    }
+//
+//    public Long getIdemp() {
+//        return idemp;
+//    }
+//
+//    public void setIdemp(Long idemp) {
+//        this.idemp = idemp;
+//    }
+//}
