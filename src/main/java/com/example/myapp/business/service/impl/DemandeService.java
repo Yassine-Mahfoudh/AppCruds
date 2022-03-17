@@ -35,17 +35,17 @@ public class DemandeService implements IDemandeService {
 
         return demandeRepository.findAll();
     }
-
-//    @Override
-//    public Demande addNewDemande(Demande demande) {
-//        return demandeRepository.save(demande);
-//    }
-//
+    
     @Transactional
     @Override
     public void deleteDemande(Long id) {
-        Demande d = demandeRepository.findDemandeById(id);
-    demandeRepository.delete(d);
+        try {
+            Demande d = demandeRepository.findDemandeById(id);
+            demandeRepository.delete(d);
+        }
+        catch (Exception e) {
+            throw new IllegalStateException("erreur"+e);
+        }
     }
 
 
@@ -68,13 +68,17 @@ public class DemandeService implements IDemandeService {
 
     @Override
     public Demande updateDemande(Demande demande,Long id) {
-        Demande updem = demandeRepository.findDemandeById(id);
-                updem.setNom(demande.getNom());
-                updem.setMotif(demande.getMotif());
-                updem.setDateupdate(new Timestamp(new Date().getTime()));
-        updem.setId(id);
+        try {
+            Demande updem = demandeRepository.findDemandeById(id);
+            updem.setNom(demande.getNom());
+            updem.setMotif(demande.getMotif());
+            updem.setDateupdate(new Timestamp(new Date().getTime()));
+            updem.setId(id);
 
-        return demandeRepository.save(updem);
-
+            return demandeRepository.save(updem);
+        }
+        catch (Exception e) {
+            throw new IllegalStateException("erreur"+e);
+        }
     }
 }
