@@ -15,12 +15,10 @@ public class ProfilConfig {
             ProfilRepository profilRepository) {
         return args -> {
             Profil profil1 = new Profil(
-                    "admin",
-                    LocalDate.of(2022, 2, 27)
+                    "admin"
             );
             Profil profil2 = new Profil(
-                    "manager",
-                    LocalDate.of(2022, 3, 3)
+                    "manager"
             );
             profilRepository.saveAll(
                     List.of(profil1, profil2)

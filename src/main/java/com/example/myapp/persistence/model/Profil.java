@@ -38,9 +38,6 @@ public class Profil {
     @Column(name = "TYPE")
     private String type;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @Column(name = "DATE_DEBUT")
-    private LocalDate date_debut;
 
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -54,8 +51,7 @@ public class Profil {
     @ManyToMany(fetch = EAGER)
     private Collection<Fonctionalite> fonctionalites = new ArrayList<>();
 
-    public Profil(String type, LocalDate date_debut) {
+    public Profil(String type) {
         this.type = type;
-        this.date_debut = date_debut;
     }
 }

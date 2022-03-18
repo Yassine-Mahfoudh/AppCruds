@@ -63,7 +63,6 @@ public class ProfilService implements IProfilService {
         try {
             Profil upprof = profilRepository.findProfilById(id);
             upprof.setType(profil.getType());
-            upprof.setDate_debut(profil.getDate_debut());
             upprof.setDateupdate(new Timestamp(new Date().getTime()));
             upprof.setId(id);
 
