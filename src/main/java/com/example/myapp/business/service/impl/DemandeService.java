@@ -5,7 +5,6 @@ import com.example.myapp.business.service.IDemandeService;
 import com.example.myapp.persistence.model.Demande;
 import com.example.myapp.persistence.repository.DemandeRepository;
 import lombok.AllArgsConstructor;
-import org.aspectj.weaver.bcel.ExceptionRange;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -82,8 +81,7 @@ public class DemandeService implements IDemandeService {
     @Override
     public void deleteDemandeById(Long id) {
         try {
-            Demande d = demandeRepository.findDemandeById(id);
-            demandeRepository.delete(d);
+            demandeRepository.deleteById(id);
         }
         catch (Exception e) {
             throw new IllegalStateException("Error DemandeService in method deleteDemandeById :: " + e.toString());

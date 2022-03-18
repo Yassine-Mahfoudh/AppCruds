@@ -22,23 +22,23 @@ public class DemandeController {
     public List<Demande> getListDemande() {
         try {
             return iDemandeService.getListDemande();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalStateException("Error DemandeController in method getListDemande :: " + e.toString());
         }
     }
 
     @GetMapping(value = "/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Demande> getDemandeById (@PathVariable("id") Long id) {
+    public ResponseEntity<Demande> getDemandeById(@PathVariable("id") Long id) {
         try {
             Demande demande = iDemandeService.getDemandeById(id);
             return new ResponseEntity<>(demande, HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalStateException("Error DemandeController in method getDemandeById :: " + e.toString());
         }
     }
 
-    @PostMapping(value="/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Demande addDemande( @RequestBody Demande demande) {
+    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Demande addDemande(@RequestBody Demande demande) {
         try {
             return iDemandeService.addDemande(demande);
         } catch (Exception e) {
@@ -46,8 +46,8 @@ public class DemandeController {
         }
     }
 
-    @PutMapping(value="/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Demande> updateDemandeById(@RequestBody Demande demande,@PathVariable("id") Long id) {
+    @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Demande> updateDemandeById(@RequestBody Demande demande, @PathVariable("id") Long id) {
         try {
             Demande updateDemande = iDemandeService.updateDemandeById(demande, id);
             return new ResponseEntity<>(updateDemande, HttpStatus.OK);
@@ -61,15 +61,10 @@ public class DemandeController {
         try {
             iDemandeService.deleteDemandeById(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalStateException("Error DemandeController in method deleteDemandeById :: " + e.toString());
         }
     }
 
+}
 
-
-
-
-
-
-    }

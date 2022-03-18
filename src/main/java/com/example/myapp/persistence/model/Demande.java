@@ -63,6 +63,10 @@ public class Demande implements Serializable {
     @JoinColumn(name = "type_id", insertable = false, updatable = false)
     private TypeDemande typeDemande;
 
+    @ManyToOne
+    @JoinColumn(name = "emp_id", insertable = false, updatable = false)
+    private Employee employee;
+
 
 
     public Demande(String nom, String motif, LocalDate datedebut, LocalDate datefin) {

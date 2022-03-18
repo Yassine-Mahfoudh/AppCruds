@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table
-public class EtatDemande {
+public class EtatDemande implements Serializable {
 
     @Id
     @SequenceGenerator(
