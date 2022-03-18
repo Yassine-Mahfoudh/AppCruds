@@ -59,8 +59,8 @@ public class Employee implements Serializable {
     private Timestamp dateupdate;
 
 
-//    @OneToOne(mappedBy = "employee")
-//    private Utilisateur utilisateur;
+    @OneToOne(mappedBy = "employee")
+    private Utilisateur utilisateur;
 
 //    @LazyCollection(LazyCollectionOption.FALSE)
 //    @ManyToOne

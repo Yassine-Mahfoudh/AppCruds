@@ -1,5 +1,6 @@
 package com.example.myapp.presentation.controller;
 
+import com.example.myapp.business.Exception.ApiRequestException;
 import com.example.myapp.business.service.IDemandeService;
 import com.example.myapp.persistence.model.Demande;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,8 @@ public class DemandeController {
         try {
             return iDemandeService.getListDemande();
         } catch (Exception e) {
-            throw new IllegalStateException("Error DemandeController in method getListDemande :: " + e.toString());
+            throw new ApiRequestException("Error DemandeController in method getListDemande with custom exception");
+//            throw new IllegalStateException("Error DemandeController in method getListDemande :: " + e.toString());
         }
     }
 
