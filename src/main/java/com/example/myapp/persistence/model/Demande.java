@@ -32,8 +32,9 @@ public class Demande implements Serializable {
             generator = "Demande_sequence"
     )
     private Long id;
-
+    @Column(name = "Nom_demande")
     private String nom;
+    @Column(name = "Motif_demande")
     private String motif;
 
     @CreationTimestamp

@@ -5,14 +5,13 @@ import com.example.myapp.persistence.model.Demande;
 import java.util.List;
 
 public interface IDemandeService {
-    public Demande getDemandeById(Long id);
 
     public List<Demande> getListDemande();
+    public Demande getDemandeById(Long id);
+    public Demande addDemande(Demande dem);
+    public void deleteDemandeById(Long id);
+    public Demande updateDemandeById(Demande demande,Long id);
 
-    public void deleteDemande(Long id);
-    public Demande updateDemande(Demande demande,Long id);
-
-    public Demande saveDemande(Demande dem);
 
 
 }

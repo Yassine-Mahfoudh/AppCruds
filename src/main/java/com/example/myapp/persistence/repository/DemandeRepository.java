@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 public interface DemandeRepository
         extends JpaRepository<Demande,Long> {
 
-    @Query("select p from Demande p where p.id=:id ")
+    @Query("select d from Demande d where d.id=:id ")
     public Demande findDemandeById(@Param("id") Long id);
 
-    @Query("select p from Demande p where p.nom=:nom ")
+    @Query("select d from Demande d where d.nom=:nom ")
     public Demande findDemandeByNom(@Param("nom") String nom);
 
 }
