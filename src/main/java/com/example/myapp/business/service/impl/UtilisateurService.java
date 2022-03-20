@@ -14,8 +14,14 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class UtilisateurService implements IUtilisateurService{
+public class UtilisateurService implements IUtilisateurService {
     private UtilisateurRepository utilisateurRepository;
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Utilisateur user = utilisateurRepository.findUtilisateurById();
+//        return null;
+//    }
 
     public List<Utilisateur> getListUtilisateur(){
         try {

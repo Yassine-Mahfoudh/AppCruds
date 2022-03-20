@@ -62,15 +62,15 @@ public class Employee implements Serializable {
     @OneToOne(mappedBy = "employee")
     private Utilisateur utilisateur;
 
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    @ManyToOne
-//    @JoinColumn(name = "projet_id", insertable = false, updatable = false)
-//    private Projet projet;
-//
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    @ManyToOne
-//    @JoinColumn(name = "salle_id", insertable = false, updatable = false)
-//    private Salle salle;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToOne
+    @JoinColumn(name = "projet_id", insertable = false, updatable = false)
+    private Projet projet;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToOne
+    @JoinColumn(name = "salle_id", insertable = false, updatable = false)
+    private Salle salle;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL)

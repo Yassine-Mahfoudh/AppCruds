@@ -5,6 +5,7 @@ import com.example.myapp.business.service.IDemandeService;
 import com.example.myapp.persistence.model.Demande;
 import com.example.myapp.persistence.repository.DemandeRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,12 +17,15 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
+@Transactional
+@Slf4j
 public class DemandeService implements IDemandeService {
     public final DemandeRepository demandeRepository;
 
     @Override
     public List<Demande> getListDemande() {
         try {
+            log.info("Fetching all demands ");
             return demandeRepository.findAll();
         } catch (Exception e){
             throw new IllegalStateException("Error DemandeService in method getListDemande :: " + e.toString());
@@ -37,6 +41,7 @@ public class DemandeService implements IDemandeService {
             Demande d = demandeRepository.findDemandeById(id);
             if (d == null)
                 return new Demande();
+            log.info("Fetching demand with id :{} ",id);
             return d;
         } catch (Exception e){
             throw new IllegalStateException("Error DemandeService in method getDemandeById :: " + e.toString());
@@ -54,13 +59,13 @@ public class DemandeService implements IDemandeService {
                 throw new IllegalStateException("Demande name token");
 
                 dem.setDatecreation(new Timestamp(new Date().getTime()));
-
+            log.info("Saving new demade {} to the databse ",dem.getNom());
             return demandeRepository.save(dem);
         } catch (Exception e) {
             throw new IllegalStateException("Error DemandeService in method addDemande :: " + e.toString());
         }
     }
-    @Transactional
+
     @Override
     public Demande updateDemandeById(Demande demande,Long id) {
         try {
@@ -69,6 +74,7 @@ public class DemandeService implements IDemandeService {
             updem.setMotif(demande.getMotif());
             updem.setDateupdate(new Timestamp(new Date().getTime()));
             updem.setId(id);
+            log.info("updating  demade {} to the databse ",demande.getNom());
 
             return demandeRepository.save(updem);
         }
@@ -77,10 +83,10 @@ public class DemandeService implements IDemandeService {
         }
     }
 
-    @Transactional
     @Override
     public void deleteDemandeById(Long id) {
         try {
+            log.info("Deleting demand with id {}  ",id);
             demandeRepository.deleteById(id);
         }
         catch (Exception e) {

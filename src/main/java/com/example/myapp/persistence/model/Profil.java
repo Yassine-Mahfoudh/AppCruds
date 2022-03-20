@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -48,8 +50,13 @@ public class Profil {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "Date_update")
     private Timestamp dateupdate;
+
     @ManyToMany(fetch = EAGER)
     private Collection<Fonctionalite> fonctionalites = new ArrayList<>();
+
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Collection<Utilisateur> utilisateurs = new ArrayList<>();
 
     public Profil(String type) {
         this.type = type;

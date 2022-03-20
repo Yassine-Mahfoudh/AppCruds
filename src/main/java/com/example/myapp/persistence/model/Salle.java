@@ -11,12 +11,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import static javax.persistence.FetchType.EAGER;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,23 +20,27 @@ import static javax.persistence.FetchType.EAGER;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Fonctionalite implements Serializable {
+public class Salle {
     @SequenceGenerator(
-            name = "fonctionalite_sequence",
-            sequenceName ="fonctionalite_sequence",
+            name = "salle_sequence",
+            sequenceName ="salle_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "fonctionalite_sequence"
+            generator = "salle_sequence"
     )
     @Id
-    @Column(name="ID_FONCTIONALITE", unique = true, nullable = false)
+    @Column(name="ID_SALLE")
     private Long id;
-    @Column(name = "Nom", nullable = false)
-    private String nom;
-    @Column(name = "Designation")
-    private String designation;
+    @Column(name="TYPE")
+    private String type;
+    @Column(name="NUM")
+    private int num;
+    @Column(name="NB_POSTE")
+    private int nbposte;
+    @Column(name="POURCENTAGEPRES")
+    private int pourcentagePres;
 
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -52,13 +52,19 @@ public class Fonctionalite implements Serializable {
     @Column(name = "Date_update")
     private Timestamp dateupdate;
 
-    @ManyToMany(fetch = EAGER)
+    @ManyToOne
+    @JoinColumn(name = "dep_id", insertable = false, updatable = false)
+    private Departement departement ;
+
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Collection<Profil> profils = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_SALLE")
+    private Set<Employee> employees;
 
-    public Fonctionalite(String nom, String designation) {
-        this.nom = nom;
-        this.designation = designation;
+    public Salle(String type, int num, int nbposte, int pourcentagePres) {
+        this.type = type;
+        this.num = num;
+        this.nbposte = nbposte;
+        this.pourcentagePres = pourcentagePres;
     }
-
 }

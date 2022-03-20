@@ -24,8 +24,8 @@ public class DemandeController {
         try {
             return iDemandeService.getListDemande();
         } catch (Exception e) {
-            throw new ApiRequestException("Error DemandeController in method getListDemande with custom exception");
-//            throw new IllegalStateException("Error DemandeController in method getListDemande :: " + e.toString());
+//            throw new ApiRequestException("Error DemandeController in method getListDemande with custom exception");
+            throw new IllegalStateException("Error DemandeController in method getListDemande :: " + e.toString());
         }
     }
 
